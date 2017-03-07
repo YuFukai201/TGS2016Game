@@ -22,43 +22,6 @@ public class Bullet_Reload_UI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		/*//残弾があるの時
-		if (CommonUtility.m_reload_Flag == false) 
-		{	//commonにあるbullet数によってuiのαをいじる　今はshot.csでbulletの数をいじっているけどあとで変える。
-			for (int i = 0; i < CommonUtility.Remaining_bullets; i++) 
-			{
-				BulletUI[i].color = new Color (255, 255, 255, 0);
-				BulletTokenUI[i].color = new Color (255, 255, 255, 255);
-				if (CommonUtility.Remaining_bullets == 0) 
-				{
-					CommonUtility.m_reload_Flag = true;
-				}
-			}
-		}*/
-		/*
-		//残弾がない時
-		if (CommonUtility.m_reload_Flag)
-		{	//commonにあるbullet数によってuiのαをいじる　今はshot.csでbulletの数をいじっているけどあとで変える。
-			for (int i = CommonUtility.Remaining_bullets ; i >= CommonUtility.Remaining_bullets; i--) 
-			{
-				Bullet[i].color = new Color (255, 255, 255, 255);
-				Token[i].color = new Color (255, 255, 255, 0);
-				Darumasan_UI [i].color = new Color (255, 255, 255, 255);
-				if (CommonUtility.Remaining_bullets == 0) 
-				{
-					CommonUtility.m_reload_Flag = false;
-
-
-					for(int j = 0; j < Darumasan_UI.Length; j++)
-					{
-						//Darumasan_UI [j].color = new Color (255, 255, 255, 0);
-
-						StartCoroutine(DarumaUI_FadeOut(Darumasan_UI[j]));
-					}
-				}
-			}
-		}
-		*/
 
 	}
 
