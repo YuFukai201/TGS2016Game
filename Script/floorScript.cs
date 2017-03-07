@@ -5,16 +5,18 @@ using System.Linq;
 
 public class floorScript : MonoBehaviour
 {
+    //照準の拡大率/有効角度
     float n = 0.8f / 15f;
 
-    
+    //エフェクト
     public GameObject effect;
     GameObject effectclone;
+    //光
     public GameObject light;
     List<GameObject> m_lightClone = new List<GameObject>();
-    
+    //プレイヤー
     public GameObject player;
-
+    //照準
     public GameObject CrossHaier;
 	private float CrossHaierScale = 0.5f;
     
@@ -44,9 +46,7 @@ public class floorScript : MonoBehaviour
     {
 
        
-        //Debug.Log(m_lightClone.Count);
-
-              
+                  
         float minDistance =-1;
 
         var LCount = m_lightClone.Count;
@@ -95,7 +95,7 @@ public class floorScript : MonoBehaviour
                     CrossHaier.transform.localScale = Vector3.one * CrossHaierScale * (0.5f + n * (15 - theta + 1));
                     if (LCount >= 1)
                     {
-                        //光を数えてその数かける0.1倍率。lightCがdestroyしたら要素数-1
+                        //光の数*0.1倍率。lightCがdestroyしたら要素数-1
 						CrossHaier.transform.localScale = Vector3.one * CrossHaierScale * (0.5f + n * (15 - theta + 1) + LCount * 0.1f);
                         
                     }
@@ -108,12 +108,7 @@ public class floorScript : MonoBehaviour
 
                
             }
-            /*
-            if (lightC == false)
-            {
-                CrossHaier.transform.localScale = Vector3.one * 0.5f;
-            }
-              */
+         
         }
 	
     }
@@ -125,7 +120,6 @@ public class floorScript : MonoBehaviour
         if (col.gameObject.tag == ("bullet"))
         {
 
-          
             //エフェクト生成。指定、位置指定、回転は標準。 位置はbulletがぶつかった場所
             effectclone = GameObject.Instantiate(effect, col.gameObject.transform.position, Quaternion.Euler(-90,0,0)) as GameObject;
 
@@ -134,14 +128,13 @@ public class floorScript : MonoBehaviour
             var lightC = GameObject.Instantiate(light, col.gameObject.transform.position, Quaternion.identity) as GameObject;
             //要素追加
             m_lightClone.Add(lightC);
-           //レティクルの初期スケール
+           //照準の初期スケール
             CrossHaier.transform.localScale = Vector3.one * CrossHaierScale;
            
            
             //光源削除。要素も削除
             StartCoroutine(LightDestroy(lightC, DestroyTime));
-//            Destroy(lightC, 5f);
-            
+           
 			// 着弾した時のSE
 			SoundObj.Fire_Play();
 
