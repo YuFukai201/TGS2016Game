@@ -57,7 +57,7 @@ public class main : MonoBehaviour
 	/// </summary>
 	static public int EnemyAppearCount = 0;
 
-	//	構造体 publicにしないと怒られる（不安定）
+	//敵のステータス
 	public struct EnemyType
 	{
 		public string EnemyName;		//	名前
@@ -86,13 +86,12 @@ public class main : MonoBehaviour
 	/// メインが初期化されると true になる
 	/// </summary>
 	public bool isAction = false;
-
-	bool isClearFlag = true;
-    //第一幕表示用
+    //ステージクリアフラグ
+	bool isStageClearFlag = false;
+    //スタート時の演出用
 	private bool isFadeOneFlag = true;
 
-	//test用
-	//    CommonUtility.m_Score m_Score;
+	
 	#endregion
 
 
@@ -150,7 +149,7 @@ public class main : MonoBehaviour
             //ここで倒されたかどうか毎フレームチェック
             StageMove();
 
-			///	設定時間がある限り発生チェックを行う mganerateObjじゃなくposにしたい
+			///	設定時間がある限り発生チェックを行う
 			if (EnemyAppearCount < m_generateObj[CommonUtility.StageNum].m_genaratePos.Count) {
                 //何ステージ目の何番湧き地か
 				var _paraPos = m_generateObj [CommonUtility.StageNum].m_genaratePos [EnemyAppearCount];
@@ -210,22 +209,10 @@ public class main : MonoBehaviour
 		//	生成位置 配列から取得
 		Enemy.transform.localPosition = enemy.pos;
 
-		//	Dictionaryに追加
-		//CommonUtility.m_EnemyDictionary.Add(Enemy.name, Enemy);
+		
 	}
 
-	/// <summary>
-	/// 敵の消去
-	/// </summary>
-	/// <param name="name">Name.</param>
-	public void EnemyDestroy(string name)
-	{
-		if (CommonUtility.m_EnemyDictionary.ContainsKey(name))
-		{
-			//ディクショナリから名前削除
-			CommonUtility.m_EnemyDictionary.Remove(name);
-		}
-	}
+	
 
 	/// <summary>
 	/// 敵の名前を表示する
@@ -243,9 +230,9 @@ public class main : MonoBehaviour
        if (m_generateObj[CommonUtility.StageNum].m_genaratePos.Count <= CommonUtility.DeadCount)
 		{
 			
-            if (isClearFlag)
+            if (!isStageClearFlag)
             {
-                isClearFlag = false;
+                isStageClearFlag = true;
                 //暗転
                 //fade処理
                 Fade m_Fade = GetComponent<Fade>();
@@ -270,7 +257,7 @@ public class main : MonoBehaviour
         EnemyAppearCount = 0;
         //デッドカウントリセット
         CommonUtility.DeadCount = 0;
-        
+        //startに入れるべき？
 
         //フェードイン
         Fade m_Fade = GetComponent<Fade>();
@@ -296,41 +283,32 @@ public class main : MonoBehaviour
      //止めた処理を再開と ～幕のフェードアウト
     void reStartGameScene()
     {
-        //～幕フェードアウト　
+        //～幕フェードアウト
         Fade m_Fade = GetComponent<Fade>();
-        m_Fade.FadeStart(3, test);
+        m_Fade.FadeStart(3, EffectFinish);
         //～幕が消えたら処理再開
     }
 
-    void test()
+    void EffectFinish()
     {
        // Application.LoadLevel("ResultScene");
         Debug.Log("finish");
         isAction = true;
-		isClearFlag = true;
+		isStageClearFlag = false;
     }
 
 	void GameClear()
 	{
-		// isGameClear_Flag = false;
-		// gameClear_Flag = true;
-		//titleに飛ばす
-		//SceneManager.LoadScene ("tutorial");
-
 		// GameClear_BGMの呼び出し
 		BGMObj.GameClear_BGM ();
 	}
   
 	void Stage1_Fade_out()
 	{
-		Fade m_Fade = GetComponent<Fade>();
-		m_Fade.FadeStart(3, empty);
+		
 		isFadeOneFlag = false;
 	}
-	void empty()
-	{
-		
-	}
+	
 	#endregion
 
 }
