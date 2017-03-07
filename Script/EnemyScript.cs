@@ -43,44 +43,7 @@ public class EnemyScript : MonoBehaviour {
 
 		isActive = true;
 
-		//敵の型（仮）
-		//自分の持ってるIDで型作り（歩く速度、大きさ、隠れる速さ）大きさに合わせてpositionYを調整
-		/*  if (main.EnemyAppearCount % 3 == 0)
-        {
-            //スピード
-            MoveSpeed = 2f;
-            //スケール
-            this.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
-            //ポジション。地面にめり込まないようにする
-          /*  pos = transform.position;
-            pos.y += 0.5f;
-            this.transform.position = pos;
-
-            Debug.Log("型１");
-        }
-        else if (main.EnemyAppearCount % 3 == 1)
-        {
-            MoveSpeed = 1.5f;
-            //スケール
-           this.transform.localScale = new Vector3(3, 3, 3);
-            /*
-            //ポジション。地面にめり込まないようにする
-            pos = transform.position;
-            pos.y += 1f;
-            this.transform.position = pos;
-            Debug.Log("型２");
-        }
-        else
-        {
-            MoveSpeed = 0.5f;
-            this.transform.localScale = new Vector3(5, 5, 5);
-            /*
-            pos = transform.position;
-            pos.y += 1.5f;
-            this.transform.position = pos;
-            Debug.Log("型３");
-        }
-    */
+		
 		m_EnemySE = GameObject.Find("EnemySE").GetComponent<EnemySEControl> ();
 	}
 
