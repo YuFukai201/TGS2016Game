@@ -29,14 +29,13 @@ public class RenderEnemy : MonoBehaviour {
         }
         isActive = false;
     }
-   
+    //	FildOfViewを10以下にすると受け付けない
     //	MeshRenderを入れないと反応しない
     void OnWillRenderObject()
     {
 		//cardbordの下のsecondcameraのtag名
 		if (Camera.current.tag == "subcamera")
         {
-            Debug.Log("入ってるよ！よ！");
             isActive = true;
         }
     }
