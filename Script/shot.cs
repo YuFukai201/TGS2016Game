@@ -14,7 +14,7 @@ public class shot : MonoBehaviour {
     public Transform tip;
     //弾速
     public float speed = 500;
-    //連射
+    //発射間隔
     private float time = 0f;
     public float interval = 100f;
     //オブジェクトが出現から消えるまで
